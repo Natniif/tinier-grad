@@ -16,6 +16,34 @@ class Tensor:
     def __repr__(self):
         return f"Value(data={self.data}, grad={self.grad})"
 
+    @property
+    def shape(self):
+        return self.data.shape
+
+    @classmethod
+    def ones(cls, *shape): 
+        return cls(np.ones(shape, dtype=np.float32))
+
+    @classmethod
+    def empty(cls, *shape):
+        return cls(np.empty(shape, dtype=np.float32))
+
+    @classmethod
+    def randn(cls, *shape):
+        return cls(np.randn(shape, dtype=np.float32))
+
+    @classmethod
+    def zeros(cls, *shape): 
+        return cls(np.zeros(shape, dtype=np.float32))
+
+    @classmethod
+    def zeros_like(cls, tensor): 
+        return cls.zeros(np.zeros_like(*tensor.shape))
+
+    @classmethod
+    def eye(cls, *shape):
+        return cls(np.eye(shape, dtype=np.float32))
+
     def backward(self):
         if self.requires_grad:
 
